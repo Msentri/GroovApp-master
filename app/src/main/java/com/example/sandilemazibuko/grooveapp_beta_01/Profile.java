@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 public class Profile extends AppCompatActivity {
 
-    LocalStorage userDatabase;
+    //LocalStorage userDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +22,8 @@ public class Profile extends AppCompatActivity {
 
 
 
-        userDatabase = new LocalStorage(this);
+        LocalStorage userDatabase = new LocalStorage(this);
+
 
         String first_name = userDatabase.sharedPreferences.getString("user_name","N/A");
         String last_name = userDatabase.sharedPreferences.getString("user_surname","N/A");
@@ -55,43 +56,5 @@ public class Profile extends AppCompatActivity {
             }
         });
 
-    }
-    /**
-     * -------------------------------------------------------------------------------------------------------------
-     * MENU NAVIGATION
-     * -------------------------------------------------------------------------------------------------------------
-     * */
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_profile, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        userDatabase = new LocalStorage(this);
-
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            Toast.makeText(Profile.this, "Settings", Toast.LENGTH_SHORT).show();
-        }else if(id == R.id.action_about_this_app){
-            Toast.makeText(Profile.this, "About This App", Toast.LENGTH_SHORT).show();
-        }else if(id == R.id.action_instructions){
-            Toast.makeText(Profile.this, "App Instructions", Toast.LENGTH_SHORT).show();
-        }else if(id == R.id.action_faqs){
-            Toast.makeText(Profile.this, "FAQ's", Toast.LENGTH_SHORT).show();
-        }else if(id == R.id.action_logout){
-            userDatabase.clearUserData();
-            Intent intent = new Intent(Profile.this, MainActivity.class);
-            startActivity(intent);
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }

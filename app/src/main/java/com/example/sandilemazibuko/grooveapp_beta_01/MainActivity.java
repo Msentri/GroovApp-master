@@ -16,12 +16,19 @@ public class MainActivity extends AppCompatActivity {
     LocalStorage userDatabase;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        userDatabase = new LocalStorage(this);
+
+        if(userDatabase.isLoggedin()){
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_profile);
+        }else {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main);
 
-            Button btnGoToRegister,btnGoToLogin;
+            Button btnGoToRegister, btnGoToLogin;
 
-
+            //userDatabase = new LocalStorage(this);
+            //userDatabase.clearUserData();
 
             btnGoToRegister = (Button) findViewById(R.id.btnRegister);
             btnGoToLogin = (Button) findViewById(R.id.btnLogin);
@@ -43,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
             });
+        }
 
     }
 
